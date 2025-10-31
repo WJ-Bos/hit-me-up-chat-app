@@ -3,12 +3,12 @@ version: '3.8'
 services:
   mysql:
     image: mysql:8.0
-    container_name: springboot-mysql
+    container_name: chatapp-mysql
     restart: always
     environment:
       MYSQL_DATABASE: chatApp
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_USER: auth
+      MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:
       - "3306:3306"
@@ -19,6 +19,49 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - chatapp-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: chatapp-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/chatApp
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - chatapp-network
+
+  middleware:
+    build:
+      context: ./middleware
+      dockerfile: Dockerfile
+    container_name: chatapp-middleware
+    restart: always
+    ports:
+      - "8020:8020"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/chatApp
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+      JWT_SECRET: a388fa4107c45ade94f89acb81515a1ff6733ca840858e0cea2a884f3ff664e690fff922
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - chatapp-network
 
 volumes:
   mysql_data:
+
+networks:
+  chatapp-network:
+    driver: bridge
