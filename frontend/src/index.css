@@ -1,1 +1,129 @@
 @import "tailwindcss";
+
+@theme {
+    /* Club-worthy color palette */
+    --color-club-darker: #050505;
+    --color-club-dark: #0a0a0a;
+
+    --color-club-purple-light: #a78bfa;
+    --color-club-purple: #8b5cf6;
+    --color-club-purple-dark: #6d28d9;
+
+    --color-club-gold-light: #fcd34d;
+    --color-club-gold: #f59e0b;
+    --color-club-gold-dark: #d97706;
+
+    --color-club-gray-light: #374151;
+    --color-club-gray: #1f2937;
+    --color-club-gray-dark: #111827;
+
+    /* Shadows */
+    --shadow-neon: 0 0 20px rgb(139 92 246 / 0.5);
+    --shadow-neon-gold: 0 0 20px rgb(245 158 11 / 0.5);
+}
+
+body {
+    background-color: var(--color-club-darker);
+    color: white;
+}
+
+/* Custom components */
+.glass-effect {
+    backdrop-filter: blur(40px);
+    background-color: rgb(255 255 255 / 0.05);
+    border: 1px solid rgb(255 255 255 / 0.1);
+}
+
+.input-club {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: rgb(10 10 10 / 0.5);
+    border: 1px solid rgb(55 65 81 / 0.3);
+    border-radius: 0.5rem;
+    color: white;
+    transition: all 0.3s;
+}
+
+.input-club::placeholder {
+    color: rgb(107 114 128);
+}
+
+.input-club.has-icon {
+    padding-left: 2.75rem;
+}
+
+.input-club:focus {
+    outline: none;
+    border-color: var(--color-club-purple);
+    box-shadow: 0 0 0 2px rgb(139 92 246 / 0.5);
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(to right, var(--color-club-purple), var(--color-club-purple-dark));
+    color: white;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-neon);
+    transition: all 0.3s;
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: scale(1.02);
+}
+
+.btn-primary:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    background-color: rgb(10 10 10 / 0.5);
+    border: 1px solid rgb(55 65 81 / 0.3);
+    color: white;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+    border-color: var(--color-club-purple);
+    background-color: var(--color-club-dark);
+}
+
+.btn-secondary:active {
+    transform: scale(0.98);
+}
+
+/* Divider styling */
+.divider-or {
+    position: relative;
+    margin: 1.5rem 0;
+}
+
+.divider-or::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: rgb(55 65 81 / 0.3);
+}
+
+.divider-or span {
+    position: relative;
+    display: inline-block;
+    padding: 0 1rem;
+    background-color: rgb(10 10 10);
+    color: rgb(156 163 175);
+    font-size: 0.875rem;
+    z-index: 1;
+}
