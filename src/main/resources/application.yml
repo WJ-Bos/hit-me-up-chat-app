@@ -23,3 +23,7 @@ server:
 
 api:
   version: v1
+
+jwt:
+  secret: a388fa4107c45ade94f89acb81515a1ff6733ca840858e0cea2a884f3ff664e690fff922
+  expiration: 86400000
