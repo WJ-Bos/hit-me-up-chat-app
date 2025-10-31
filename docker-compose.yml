@@ -22,6 +22,20 @@ services:
     networks:
       - chatapp-network
 
+  redis:
+    image: redis:7-alpine
+    container_name: chatapp-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - chatapp-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   backend:
     build:
       context: ./backend
@@ -52,9 +66,14 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/chatApp
       SPRING_DATASOURCE_USERNAME: user
       SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
       JWT_SECRET: a388fa4107c45ade94f89acb81515a1ff6733ca840858e0cea2a884f3ff664e690fff922
+      BACKEND_SERVICE_URL: http://backend:8080
     depends_on:
       mysql:
+        condition: service_healthy
+      redis:
         condition: service_healthy
     networks:
       - chatapp-network
