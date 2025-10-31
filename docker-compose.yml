@@ -78,6 +78,19 @@ services:
     networks:
       - chatapp-network
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: chatapp-frontend
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - middleware
+    networks:
+      - chatapp-network
+
 volumes:
   mysql_data:
 
