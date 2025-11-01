@@ -10,13 +10,13 @@ interface AuthLayoutProps {
 
 const AuthLayout = ({ children, title, subtitle }: AuthLayoutProps) => {
     return (
-        <div className="min-h-screen flex bg-[--color-club-darker]">
+        <div className="min-h-screen flex" style={{ backgroundColor: 'var(--color-bg-primary)' }}>
             {/* Left Side - Form */}
             <div className="w-full lg:w-[45%] flex items-center justify-center p-6 xl:p-8 relative overflow-hidden">
                 {/* Animated background gradient (subtle) */}
                 <motion.div
                     className="absolute top-20 -left-20 w-96 h-96 rounded-full blur-[100px]"
-                    style={{ backgroundColor: 'rgb(139 92 246 / 0.15)' }}
+                    style={{ backgroundColor: 'rgb(124 58 237 / 0.15)' }}
                     animate={{
                         scale: [1, 1.2, 1],
                         opacity: [0.15, 0.25, 0.15],
@@ -43,14 +43,16 @@ const AuthLayout = ({ children, title, subtitle }: AuthLayoutProps) => {
                         transition={{ delay: 0.2 }}
                     >
                         <h1 className="text-5xl font-bold mb-2" style={{
-                            background: 'linear-gradient(to right, var(--color-club-purple-light), var(--color-club-purple), var(--color-club-gold))',
+                            background: 'linear-gradient(135deg, var(--color-accent-primary) 0%, var(--color-accent-tertiary) 50%, var(--color-gold) 100%)',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                             backgroundClip: 'text'
                         }}>
                             HitMeUp
                         </h1>
-                        <p className="text-gray-400 text-sm">Where conversations come alive</p>
+                        <p style={{ color: 'var(--color-text-secondary)' }} className="text-sm">
+                            Where conversations come alive
+                        </p>
                     </motion.div>
 
                     {/* Card */}
@@ -61,8 +63,12 @@ const AuthLayout = ({ children, title, subtitle }: AuthLayoutProps) => {
                         transition={{ delay: 0.3 }}
                     >
                         <div className="mb-6">
-                            <h2 className="text-2xl font-bold text-white mb-2">{title}</h2>
-                            <p className="text-gray-400 text-sm">{subtitle}</p>
+                            <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--color-text-primary)' }}>
+                                {title}
+                            </h2>
+                            <p style={{ color: 'var(--color-text-secondary)' }} className="text-sm">
+                                {subtitle}
+                            </p>
                         </div>
 
                         {children}
@@ -89,7 +95,7 @@ const AuthLayout = ({ children, title, subtitle }: AuthLayoutProps) => {
                 <div
                     className="absolute inset-0"
                     style={{
-                        background: 'linear-gradient(to right, rgb(5 5 5) 0%, rgb(5 5 5 / 0.8) 40%, rgb(5 5 5 / 0.4) 70%, transparent 100%)'
+                        background: 'linear-gradient(to right, var(--color-bg-primary) 0%, rgb(13 13 15 / 0.7) 20%, rgb(13 13 15 / 0.3) 50%, transparent 100%)'
                     }}
                 />
 
@@ -97,14 +103,14 @@ const AuthLayout = ({ children, title, subtitle }: AuthLayoutProps) => {
                 <div
                     className="absolute inset-0"
                     style={{
-                        background: 'linear-gradient(135deg, rgb(139 92 246 / 0.25) 0%, transparent 60%)',
+                        background: 'linear-gradient(135deg, rgb(124 58 237 / 0.2) 0%, transparent 50%)',
                     }}
                 />
 
                 {/* Animated purple glow */}
                 <motion.div
                     className="absolute bottom-20 right-20 w-72 h-72 rounded-full blur-[120px]"
-                    style={{ backgroundColor: 'rgb(139 92 246 / 0.4)' }}
+                    style={{ backgroundColor: 'rgb(124 58 237 / 0.3)' }}
                     animate={{
                         scale: [1, 1.3, 1],
                         opacity: [0.3, 0.6, 0.3],
@@ -127,7 +133,7 @@ const AuthLayout = ({ children, title, subtitle }: AuthLayoutProps) => {
                         Connect with anyone, anywhere
                     </motion.h3>
                     <motion.p
-                        className="text-gray-300 text-lg md:text-xl leading-relaxed drop-shadow-md"
+                        style={{ color: 'var(--color-text-secondary)' }}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 1 }}
